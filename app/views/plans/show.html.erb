@@ -1,0 +1,29 @@
+<div class="new_form_container">
+
+    <div>
+        <span><%= link_to "← 一覧に戻る", :plans, class: "back_link2" %></span>
+    </div>
+    <div class="title_container">
+        <span class="detail_title"><%= @plan.title %></span>
+        <span><%= link_to "編集", [:edit, @plan], class: "detail_edit" %></span>
+    </div>
+
+    <table class="show_table">
+        <tr>
+            <th class="show_head">開始日</th>
+            <td class="show_data"><%= @plan.start %></td>
+        </tr>
+        <tr>
+            <th class="show_head">終了日</th>
+            <td class="show_data"><%= @plan.end %></td>
+        </tr>
+        <tr>
+            <th class="show_head">終日</th>
+            <td class="show_data"><%= @plan.allday ? "◯" : "" %></td>
+        </tr>
+        <tr>
+            <th class="show_head">スケジュールメモ</th>
+            <td class="show_data"><%= @plan.memo %></td>
+        </tr>
+    </table>
+</div>
