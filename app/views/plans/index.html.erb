@@ -1,0 +1,53 @@
+<div class="content">
+
+    <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+
+    <div class="head">
+        <div class="allplan"><span>予定一覧</span></div>
+        <button class="new"><%= link_to "＋ 新規追加", :new_plan, class: "buttoncss" %></button></button>
+    </div>
+
+    <table class="plan_table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>開始日</th>
+                <th>終了日</th>
+                <th>終日</th>
+                <th>更新日時</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @plans.each do |plan| %>
+                <tr class="each_data">
+                    <td><%= plan.id %></td>
+                    <td><%= plan.title %></td>
+                    <td><%= plan.start %></td>
+                    <td><%= plan.end %></td>
+                    <td><%= plan.allday ? "◯" : "" %></td>
+                    <td><%= plan.updated_at.to_s(:datetime_jp) %></td>
+                    <td>
+                        <%= link_to "詳細", plan, class: "detail" %>
+                    </td>
+                    <td>
+                        <%= link_to "編集", [:edit, plan], class: "edit" %>
+                    </td>
+                    <td>
+                        <%= link_to "削除", plan, method: :delete, data:{ confirm: "本当に削除しますか？"} %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <div class="total">
+    <span class="totalfont">予定合計 <span class="totalnum"><%= @plans.count(:id) %></span>件</span>
+    <span class="date">本日の日付 <%= Date.current.strftime('%Y/%m/%d') %></span>
+</div>
